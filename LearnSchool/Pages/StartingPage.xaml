@@ -1,0 +1,93 @@
+﻿<Page x:Class="LearnSchool.Pages.StartingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LearnSchool.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1450"
+      Title="AuthorizationPage">
+
+    <Grid>
+        <!--
+        Разметка страницы
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--
+        Цветные поля
+        -->
+        <Rectangle Grid.RowSpan="3"
+                   Fill="AliceBlue"/>
+        <Rectangle Grid.ColumnSpan="2"
+                   Fill="AliceBlue"/>
+        
+        <!--
+        Лого и название
+        -->
+        <StackPanel Orientation="Horizontal" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Image Style="{StaticResource logo}" 
+                   Source="/Images/school_logo.png"/>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Learn"
+                           Style="{StaticResource default}"
+                           Margin="0 0 0 -18"/>
+                <TextBlock Text="school"
+                            Style="{StaticResource default}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--
+        Вход как администратор
+        -->
+        <Button Grid.Column="1"
+                Style="{StaticResource admin}"
+                x:Name="adminBtn" 
+                Click="adminBtn_Click">
+            <Run Text="Войти как администратор" 
+                 TextDecorations="Underline"/>
+        </Button>
+
+        <!--
+        Основная часть
+        -->
+        <StackPanel Grid.Column="1" 
+                    Grid.Row="1"
+                    Width="805"
+                    Margin="-90 0 90 0">
+            <TextBlock Style="{StaticResource Main}"
+                       TextWrapping="Wrap"
+                       Margin="0 60 0 0"
+                       TextAlignment="Center">
+            Школа иностранных языков LearnSchol. Привет и Hello!
+            </TextBlock>
+            <TextBlock Style="{StaticResource default}"
+                   TextWrapping="Wrap"
+                       Margin="0 50"
+                       TextAlignment="Justify">
+            Уважаемые пользователи, мы приветствуем Вас 
+                и предлагаем ознакомиться с информацией 
+                о нашей школе.
+            </TextBlock>
+            <TextBlock Style="{StaticResource default}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center">
+            Выберите, что Вы хотите посмотреть:
+            </TextBlock>
+            <Button Content="услуги" 
+                    Margin="0 20 0 0"
+                    x:Name="servicesBtn" 
+                    Click="servicesBtn_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

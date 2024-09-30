@@ -1,0 +1,34 @@
+﻿<Window x:Class="LearnSchool.AdminAuthentification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LearnSchool"
+        mc:Ignorable="d"
+        Title="AdminAuthentification" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Аутентификация администратора" 
+                   FontFamily="Comic Sans MS"
+                   FontSize="37"
+                       FontWeight="Bold"
+                       Foreground="#04A0FF"
+                       Margin="0 60 0 80"
+                   HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="код-пароль:"
+                           FontFamily="Comic Sans MS"
+                           FontSize="27"
+                           Margin="15"/>
+                <TextBox Width="170"
+                         x:Name="passwordTb"
+                         Margin="15"
+                         BorderBrush="#04A0FF"
+                         BorderThickness="3">
+                </TextBox>
+            </StackPanel>
+            <Button Content="войти" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
