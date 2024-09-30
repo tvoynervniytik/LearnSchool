@@ -77,7 +77,7 @@
 
         <StackPanel
                     Grid.Row="2" Grid.Column="2"
-                    VerticalAlignment="Center">
+                    >
 
             <StackPanel Orientation="Vertical"
                        >
@@ -195,6 +195,7 @@
                 </ListView.ItemsPanel>
             </ListView>
 
+            <StackPanel Orientation="Horizontal">
             <StackPanel x:Name="editStP" 
                     Grid.Row="2"
                     Grid.Column="1"
@@ -208,9 +209,14 @@
                 <Button x:Name="deleteBtn"
                     Style="{StaticResource circle}"
                     Content="×"/>
+            </StackPanel>
+
 
                 <TextBlock Style="{StaticResource default}"
-                           x:Name="countInRealTb"/>
+                           Text="" x:Name="countInRealTb"
+                           Margin="500 0 0 0"/>
+                <TextBlock Style="{StaticResource default}"
+                           Text="/"/>
                 <TextBlock Style="{StaticResource default}"
                            x:Name="countInDBTb"/>
             </StackPanel>

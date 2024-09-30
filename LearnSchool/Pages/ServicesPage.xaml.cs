@@ -24,11 +24,15 @@ namespace LearnSchool.Pages
     {
         private static List<Service> services { get; set;}
         private static bool isAdmin = false;
+        private static int countAll = new List<Service>(DBConnection.learnSchool.Service).Count;
+        private static int countReal;
         public ServicesPage()
         {
             InitializeComponent();
 
             services = new List<Service>(DBConnection.learnSchool.Service);
+            countInDBTb.Text = countAll.ToString();
+            countInRealTb.Text = services.Count.ToString();
 
             if (Functions.Authorization.typeUser == 0)
             {
@@ -96,6 +100,7 @@ namespace LearnSchool.Pages
             }
 
             services = services.Where(i => i.Title.ToLower().StartsWith(nameTb.Text.ToLower())).ToList();
+            countInRealTb.Text = services.Count.ToString();
 
             servicesLv.ItemsSource = services;
         }
