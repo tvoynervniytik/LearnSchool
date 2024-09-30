@@ -26,6 +26,7 @@
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="27"/>
+            <Setter Property="Width" Value="300"/>
         </Style>
         <!-- 
         Оформление Button
@@ -158,6 +159,16 @@
             <Setter Property="Height" Value="50"></Setter>
             <Setter Property="Margin" Value="0 0 7 0"></Setter>
             <Setter Property="Width" Value="50"></Setter>
+        </Style>
+        <!-- 
+        Оформление ComboBox
+        -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Margin" Value="7 0 7 0"></Setter>
+            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Application.Resources>
 </Application>

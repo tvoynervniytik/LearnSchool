@@ -75,58 +75,113 @@
         Основная часть
         -->
 
-        <StackPanel Margin="0 40"
+        <StackPanel
                     Grid.Row="2" Grid.Column="2"
                     VerticalAlignment="Center">
+
+            <StackPanel Orientation="Vertical"
+                       >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Стоимость:" 
+                           Style="{StaticResource default}"/>
+                <ComboBox x:Name="costCb" Width="200">
+                    <ComboBoxItem>
+                        <TextBlock Text="По возрастанию"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="По убыванию"/>
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="Скидка:" 
+                           Margin="30 0 0 0"
+                           Style="{StaticResource default}"/>
+                <ComboBox x:Name="saleCb" Width="200" SelectionChanged="saleCb_SelectionChanged">
+                    <ComboBoxItem>
+                        <TextBlock Text="0 до 5%"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="5 до 15%"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="15 до 30%"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="30 до 70%"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="70 до 100%"/>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Button x:Name="delSaleBtn"
+                        Style="{StaticResource circle}"
+                        Width="60" Content="x" Click="delSaleBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                           Text="Наименование:"
+                           Style="{StaticResource default}"/>
+                <TextBox x:Name="nameTb" TextChanged="nameTb_TextChanged" />
+                    
+                </StackPanel>
+            </StackPanel>
+
             <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     x:Name="servicesLv"
-                    Width="1060"
-                    Height="450"
+                    Width="auto"
+                    Height="400"
                     d:ItemsSource="{d:SampleData ItemCount=9}"
                     BorderThickness="0"
-                    Background="#E7FABF">
+                    Background="AliceBlue">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="1"
                                 BorderBrush="Gray"
-                                Width="340"
-                                Height="145">
+                                Width="400"
+                                Height="205">
                             <Grid Margin="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Source="{Binding Image}"/>
-                                <Rectangle Fill="Black" Opacity="0.5"/>
+                                <Image Source="{Binding MainImagePath}"/>
+                                
 
                                 <StackPanel Margin="10"
                                             Grid.Column="1">
-                                    <TextBlock Text="{Binding }"
+                                    <TextBlock Text="{Binding Title}"
                                                FontWeight="Bold"
                                                FontSize="16" 
                                                TextWrapping="Wrap"
                                                Foreground="Gray"
-                                               Margin="5 20 0 0"/>
+                                               Margin="5 10 0 0"/>
                                     <TextBlock Foreground="Gray"
-                                               Text="{Binding PriceInDollars, StringFormat='Price: ${0}'}"
+                                               Text="{Binding Cost, StringFormat='Цена: {0} рублей'}"
                                                FontSize="14" 
                                                Margin="5 0 0 0"/>
-                                    <TextBlock FontSize="14">
+
+                                    <StackPanel Orientation="Horizontal" 
+                                                Width="200"
+                                               >
+                                        <TextBlock FontSize="14">
                                         
-                                    <Hyperlink Foreground="Gray"
-                                               x:Name="HLedit">
-                                       <Border BorderBrush="Gray" BorderThickness="1">
-                                            <TextBlock Text=" редактировать " Margin="5 0 0 0"/>
-                                       </Border>    
-                                    </Hyperlink>
-                                    <Hyperlink Foreground="Gray"
-                                               x:Name="HLDelete">
-                                        <Border BorderBrush="Gray" BorderThickness="1">
-                                             <TextBlock Text=" удалить " Margin="0 0 0 0"
-                                                  />
-                                            </Border>
-                                    </Hyperlink>
+                                            <Hyperlink Foreground="Gray"
+                                                       x:Name="HLedit">
+                                               <Border BorderBrush="Gray" BorderThickness="1">
+                                                    <TextBlock Text=" редактировать " Margin="5 0 0 0"/>
+                                               </Border>    
+                                            </Hyperlink>        
                                     </TextBlock>
+                                    <TextBlock FontSize="14" Margin="10 0">
+                                        <Hyperlink Foreground="Gray"
+                                               
+                                                   x:Name="HLDelete">
+                                            <Border BorderBrush="Gray" BorderThickness="1">
+                                                 <TextBlock Text=" удалить " 
+                                                      />
+                                                </Border>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -143,7 +198,6 @@
             <StackPanel x:Name="editStP" 
                     Grid.Row="2"
                     Grid.Column="1"
-                       Margin="120 20"
                     Orientation="Horizontal">
                 <Button x:Name="addBtn"
                     Style="{StaticResource circle}"
@@ -154,6 +208,11 @@
                 <Button x:Name="deleteBtn"
                     Style="{StaticResource circle}"
                     Content="×"/>
+
+                <TextBlock Style="{StaticResource default}"
+                           x:Name="countInRealTb"/>
+                <TextBlock Style="{StaticResource default}"
+                           x:Name="countInDBTb"/>
             </StackPanel>
         </StackPanel>
     </Grid>

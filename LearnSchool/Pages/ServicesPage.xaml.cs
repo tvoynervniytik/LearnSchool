@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LearnSchool.DB;
 
 namespace LearnSchool.Pages
 {
@@ -20,9 +22,14 @@ namespace LearnSchool.Pages
     /// </summary>
     public partial class ServicesPage : Page
     {
+        private static List<Service> services { get; set;}
+        private static bool isAdmin = false;
         public ServicesPage()
         {
             InitializeComponent();
+
+            services = new List<Service>(DBConnection.learnSchool.Service);
+
             if (Functions.Authorization.typeUser == 0)
             {
                 editStP.Visibility = Visibility.Hidden;
@@ -30,7 +37,11 @@ namespace LearnSchool.Pages
             else if (Functions.Authorization.typeUser == 1)
             {
                 adminBtn.Visibility = Visibility.Hidden;
+                isAdmin = true;
             }
+
+            servicesLv.ItemsSource = services;
+            this.DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,6 +59,63 @@ namespace LearnSchool.Pages
 
             Window window = Window.GetWindow(this);
             window.Close();
+        }
+
+        private void Refresh()
+        {
+            services = new List<Service>(DBConnection.learnSchool.Service);
+            if (costCb.SelectedIndex == 0)
+            {
+                
+            }
+            else if (costCb.SelectedIndex == 1)
+            {
+
+            }
+
+            //discount ComboBox
+            if (saleCb.SelectedIndex == 0)
+            {
+                services = services.Where(i => i.Discount >= 0 & i.Discount < 0.05 ).ToList();
+            }
+            else if (saleCb.SelectedIndex == 1)
+            {
+                services = services.Where(i => i.Discount >= 0.05 &  i.Discount < 0.15 ).ToList();
+            }
+            else if (saleCb.SelectedIndex == 2)
+            {
+                services = services.Where(i => i.Discount >= 0.15 &  i.Discount < 0.30 ).ToList();
+            }
+            else if (saleCb.SelectedIndex == 3)
+            {
+                services = services.Where(i => i.Discount >= 0.30 &  i.Discount < 0.70 ).ToList();
+            }
+            else if (saleCb.SelectedIndex == 4)
+            {
+                services = services.Where(i => i.Discount >= 0.70 &  i.Discount < 1 ).ToList();
+            }
+
+            services = services.Where(i => i.Title.ToLower().StartsWith(nameTb.Text.ToLower())).ToList();
+
+            servicesLv.ItemsSource = services;
+        }
+
+        private void saleCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void delSaleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            services = new List<Service>(DBConnection.learnSchool.Service);
+            saleCb.SelectedItem = null;
+            services = services;
+            Refresh();
+        }
+
+        private void nameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

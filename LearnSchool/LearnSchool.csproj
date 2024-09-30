@@ -206,6 +206,23 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\Услуги школы\for company.jpg" />
+    <Resource Include="Images\Услуги школы\online lessons.jpg" />
+    <Resource Include="Images\Услуги школы\Английский язык.jpg" />
+    <Resource Include="Images\Услуги школы\Испанский язык.jpg" />
+    <Resource Include="Images\Услуги школы\Итальянский язык.jpg" />
+    <Resource Include="Images\Услуги школы\киноклуб.jpg" />
+    <Resource Include="Images\Услуги школы\Китайский язык.jpg" />
+    <Resource Include="Images\Услуги школы\Немецкий язык.png" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену ACT.png" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену GMAT.png" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену GRE.jpeg" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену IELTS.jpg" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену SAT.png" />
+    <Resource Include="Images\Услуги школы\Подготовка к экзамену TOEFL.jpg" />
+    <Resource Include="Images\Услуги школы\Португальский язык.jpg" />
+    <Resource Include="Images\Услуги школы\Французский язык.jpg" />
+    <Resource Include="Images\Услуги школы\Японский язык.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
