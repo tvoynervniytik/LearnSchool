@@ -25,6 +25,7 @@ namespace LearnSchool
         public AdminAuthentification()
         {
             InitializeComponent();
+            Functions.Authorization.backClick = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

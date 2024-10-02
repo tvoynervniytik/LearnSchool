@@ -230,7 +230,7 @@
                     Orientation="Horizontal">
                 <Button x:Name="addBtn"
                     Style="{StaticResource circle}"
-                    Content="+"/>
+                    Content="+" Click="addBtn_Click"/>
                 
                 <!--<Button x:Name="editBtn"
                     Style="{StaticResource circle}"

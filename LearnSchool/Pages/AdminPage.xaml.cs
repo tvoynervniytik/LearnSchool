@@ -23,6 +23,7 @@ namespace LearnSchool.Pages
         public AdminPage()
         {
             InitializeComponent();
+            Functions.Authorization.backClick = false;
         }
 
         private void servicesBtn_Click(object sender, RoutedEventArgs e)

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LearnSchool.DB;
+using LearnSchool.Окна;
 
 namespace LearnSchool.Pages
 {
@@ -30,7 +31,7 @@ namespace LearnSchool.Pages
         public ServicesPage()
         {
             InitializeComponent();
-
+            Functions.Authorization.backClick = false;
             services = new List<Service>(DBConnection.learnSchool.Service);
             countInDBTb.Text = countAll.ToString();
             countInRealTb.Text = services.Count.ToString();
@@ -171,6 +172,15 @@ namespace LearnSchool.Pages
         {
             Functions.Authorization.typeUser = 0;
             Refresh();
+        }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddServiceWindow addServiceWindow = new AddServiceWindow();
+            addServiceWindow.Show();
+            Window window = Window.GetWindow(this);
+            window.Close();
+
         }
     }
 }

@@ -24,13 +24,19 @@ namespace LearnSchool
         public MainWindow()
         {
             InitializeComponent();
-            if (Functions.Authorization.typeUser == 1)
-            {
-                navFr.Navigate(new AdminPage());
-            }
+            if (Functions.Authorization.backClick)
+                navFr.Navigate(new ServicesPage());
             else
             {
-                navFr.Navigate(new StartingPage());
+                if (Functions.Authorization.typeUser == 1)
+                {
+                    navFr.Navigate(new AdminPage());
+
+                }
+                else
+                {
+                    navFr.Navigate(new StartingPage());
+                }
             }
         }
 

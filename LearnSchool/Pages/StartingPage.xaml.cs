@@ -23,6 +23,7 @@ namespace LearnSchool.Pages
         public StartingPage()
         {
             InitializeComponent();
+            Functions.Authorization.backClick = false;
             Refresh();
         }
         

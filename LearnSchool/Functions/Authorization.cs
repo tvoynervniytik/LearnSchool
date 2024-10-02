@@ -10,6 +10,7 @@ namespace LearnSchool.Functions
     {
         //тип пользователя (0 - обычный, 1 - администратор)
         public static int typeUser;
+        public static bool backClick;
         public static string password = "0000";
     }
 }
