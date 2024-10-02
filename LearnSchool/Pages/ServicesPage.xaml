@@ -80,16 +80,19 @@
                     >
 
             <StackPanel Orientation="Vertical"
-                       >
+                        Margin="0 0 0 30">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Стоимость:" 
                            Style="{StaticResource default}"/>
-                <ComboBox x:Name="costCb" Width="200">
+                <ComboBox x:Name="costCb" Width="200" SelectionChanged="costCb_SelectionChanged">
                     <ComboBoxItem>
                         <TextBlock Text="По возрастанию"/>
                     </ComboBoxItem>
                     <ComboBoxItem>
                         <TextBlock Text="По убыванию"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Без сортировки"/>
                     </ComboBoxItem>
                 </ComboBox>
                 <TextBlock Text="Скидка:" 
@@ -130,7 +133,8 @@
                     Width="auto"
                     Height="400"
                     d:ItemsSource="{d:SampleData ItemCount=9}"
-                    BorderThickness="0"
+                    BorderThickness="4"
+                      BorderBrush="#04A0FF"
                     Background="AliceBlue">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -141,7 +145,7 @@
                             <Grid Margin="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="270"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding MainImagePath}"/>
                                 
@@ -154,10 +158,16 @@
                                                TextWrapping="Wrap"
                                                Foreground="Gray"
                                                Margin="5 10 0 0"/>
+                                    <StackPanel Orientation="Horizontal">
                                     <TextBlock Foreground="Gray"
-                                               Text="{Binding Cost, StringFormat='Цена: {0} рублей'}"
+                                               Text="{Binding Cost, StringFormat=' {0} рублей за'}"
                                                FontSize="14" 
                                                Margin="5 0 0 0"/>
+                                        <TextBlock Foreground="Gray"
+                                               Text="{Binding DurationInSeconds, StringFormat=' {0} минут '}"
+                                               FontSize="14" 
+                                               Margin="5 0 0 0"/>
+                                    </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" 
                                                 Width="200"
@@ -195,7 +205,8 @@
                 </ListView.ItemsPanel>
             </ListView>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" 
+                        Margin="20 20">
             <StackPanel x:Name="editStP" 
                     Grid.Row="2"
                     Grid.Column="1"
@@ -203,12 +214,13 @@
                 <Button x:Name="addBtn"
                     Style="{StaticResource circle}"
                     Content="+"/>
-                <Button x:Name="editBtn"
+                
+                <!--<Button x:Name="editBtn"
                     Style="{StaticResource circle}"
                     Content="⋮"/>
                 <Button x:Name="deleteBtn"
                     Style="{StaticResource circle}"
-                    Content="×"/>
+                    Content="×"/>-->
             </StackPanel>
 
 

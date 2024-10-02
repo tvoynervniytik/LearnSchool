@@ -169,6 +169,7 @@
             <Setter Property="Width" Value="150"></Setter>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -44,6 +44,11 @@ namespace LearnSchool.Pages
                 isAdmin = true;
             }
 
+            foreach (Service service in services)
+            {
+                service.DurationInSeconds = service.DurationInSeconds / 60;
+            }
+
             servicesLv.ItemsSource = services;
             this.DataContext = this;
         }
@@ -70,12 +75,14 @@ namespace LearnSchool.Pages
             services = new List<Service>(DBConnection.learnSchool.Service);
             if (costCb.SelectedIndex == 0)
             {
-                
+                services.Sort((service1, service2) => service1.Cost.CompareTo(service2.Cost));
             }
             else if (costCb.SelectedIndex == 1)
             {
-
+                services.Sort((service1, service2) => service2.Cost.CompareTo(service1.Cost));
             }
+            else
+                services = new List<Service>(DBConnection.learnSchool.Service);
 
             //discount ComboBox
             if (saleCb.SelectedIndex == 0)
@@ -105,6 +112,8 @@ namespace LearnSchool.Pages
             servicesLv.ItemsSource = services;
         }
 
+        
+
         private void saleCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Refresh();
@@ -119,6 +128,11 @@ namespace LearnSchool.Pages
         }
 
         private void nameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void costCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Refresh();
         }
