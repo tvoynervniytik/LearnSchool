@@ -29,5 +29,11 @@ namespace LearnSchool.Pages
         {
             NavigationService.Navigate(new ServicesPage());
         }
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Functions.Authorization.typeUser = 0;
+            NavigationService.Navigate(new StartingPage());
+        }
     }
 }

@@ -47,6 +47,18 @@
             </StackPanel>
         </StackPanel>
 
+
+        <!--
+        Вход как администратор
+        -->
+        <Button Grid.Column="1"
+                Style="{StaticResource admin}"
+                x:Name="exitBtn" Width="280" Click="exitBtn_Click"
+                >
+            <Run Text="Выйти из режима администратора" 
+                 TextDecorations="Underline"/>
+        </Button>
+        
         <!--
         Заголовок
         -->

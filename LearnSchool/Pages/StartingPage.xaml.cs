@@ -36,8 +36,14 @@ namespace LearnSchool.Pages
         }
         public void Refresh()
         {
-            if (Functions.Authorization.typeUser == 1)
+            if (Functions.Authorization.typeUser == 0)
             {
+                adminBtn.Visibility = Visibility.Visible;
+                exitBtn.Visibility = Visibility.Hidden;
+            }
+            else if (Functions.Authorization.typeUser == 1)
+            {
+                exitBtn.Visibility = Visibility.Visible;
                 adminBtn.Visibility = Visibility.Hidden;
             }
         }
@@ -45,6 +51,12 @@ namespace LearnSchool.Pages
         private void servicesBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ServicesPage());
+        }
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            Functions.Authorization.typeUser = 0;
         }
     }
 }

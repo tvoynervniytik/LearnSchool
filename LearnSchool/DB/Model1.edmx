@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище LearnSchoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище LearnSchoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AttachedProduct">
           <Key>
             <PropertyRef Name="MainProductID" />
@@ -102,6 +102,11 @@
           <Property Name="Cost" Type="money" Nullable="false" />
           <Property Name="Discount" Type="float" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Visibility" Type="nvarchar" MaxLength="50" />
+          <Property Name="CostDiscount" Type="money" />
+          <Property Name="Width" Type="int" />
+          <Property Name="BackgroundColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="VisibilityAdmin" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ServicePhoto">
           <Key>
@@ -361,8 +366,7 @@
             <End Role="TagOfClient" EntitySet="TagOfClient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LearnSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -475,6 +479,11 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClientService" Relationship="Self.FK_ClientService_Service" FromRole="Service" ToRole="ClientService" />
           <NavigationProperty Name="ServicePhoto" Relationship="Self.FK_ServicePhoto_Service" FromRole="Service" ToRole="ServicePhoto" />
+          <Property Name="Visibility" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CostDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="BackgroundColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VisibilityAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ServicePhoto">
           <Key>
@@ -773,6 +782,11 @@
           <EntitySetMapping Name="Service">
             <EntityTypeMapping TypeName="LearnSchoolModel.Service">
               <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="VisibilityAdmin" ColumnName="VisibilityAdmin" />
+                <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="CostDiscount" ColumnName="CostDiscount" />
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="MainImagePath" ColumnName="MainImagePath" />
