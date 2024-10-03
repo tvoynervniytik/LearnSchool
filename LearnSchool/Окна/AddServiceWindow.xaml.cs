@@ -1,6 +1,9 @@
-﻿using LearnSchool.Pages;
+﻿using LearnSchool.DB;
+using LearnSchool.Pages;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,7 @@ namespace LearnSchool.Окна
     /// </summary>
     public partial class AddServiceWindow : Window
     {
+        public string ImagePath { get; set; }
         public AddServiceWindow()
         {
             InitializeComponent();
@@ -38,20 +42,42 @@ namespace LearnSchool.Окна
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            Functions.Authorization.backClick = true;
-            MainWindow mainWindow = new MainWindow();
-            Window window = Window.GetWindow(this);
-            mainWindow.Show();
-            window.Close();
+            CloseWindow();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CloseWindow();
+        }
+
+        private void CloseWindow()
         {
             Functions.Authorization.backClick = true;
             MainWindow mainWindow = new MainWindow();
             Window window = Window.GetWindow(this);
             mainWindow.Show();
             window.Close();
+
         }
+        private void AddPhoto()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
+            };
+
+            if (openFileDialog.ShowDialog().GetValueOrDefault())
+            {
+                ImagePath = openFileDialog.FileName;
+                img.Source = new BitmapImage(new Uri(ImagePath));
+                //this.Close();
+            }
+        }
+
+        private void photoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddPhoto();
+        }
+
     }
 }

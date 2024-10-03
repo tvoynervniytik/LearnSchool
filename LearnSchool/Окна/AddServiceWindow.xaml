@@ -144,10 +144,13 @@
                     <StackPanel>
                         <TextBlock Text="Добавление фото:" 
                                    Style="{StaticResource default}"/>
-                        <Image Width="400"
-                               Source="C:\Users\TiMON\Downloads\Telegram Desktop\20240926125546_IMG_1108.JPG"/>
-                        <Button Width="200" Content="выбрать фото" 
-                                Command="{Binding AddPhotoCommand}" />
+                        <Image Width="500"
+                               x:Name="img"
+                               Source="{Binding ImagePath}"/>
+                        <Button Width="200"
+                                x:Name="photoBtn"
+                                Content="выбрать фото" 
+                                Command="{Binding AddPhotoCommand}" Click="photoBtn_Click" />
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="addBtn" 

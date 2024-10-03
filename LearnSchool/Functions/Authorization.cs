@@ -9,7 +9,7 @@ namespace LearnSchool.Functions
     internal class Authorization
     {
         //тип пользователя (0 - обычный, 1 - администратор)
-        public static int typeUser;
+        public static int typeUser = 1;
         public static bool backClick;
         public static string password = "0000";
     }
