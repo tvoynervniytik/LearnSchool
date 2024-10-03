@@ -77,10 +77,82 @@
         -->
             <StackPanel Grid.Column="1" 
                     Grid.Row="2"
-                    Orientation="Horizontal"
+                    Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                <Button x:Name="addBtn" Click="addBtn_Click"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 10 10">
+                            <TextBlock Text="
+                               Наименование услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="nameTb"
+                             Margin="10"
+                             Width="400"
+                             Height="100"
+                             TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Продолжительность:"
+                                   TextWrapping="Wrap"
+                                   Width="310"
+                                   Style="{StaticResource default}"/>
+                            <TextBox x:Name="durationInSecTb" 
+                                 Width="150"
+                                 Margin="10"/>
+                            <TextBlock Text="сек"
+                                   Margin="0 15 0 0"
+                                   Style="{StaticResource default}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Стоимость услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="costTb" 
+                             Width="150"
+                             Margin="10"/>
+                            <TextBlock Text="₽" 
+                               Style="{StaticResource default}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Скидка услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="discountTb" 
+                             Margin="10"
+                             Width="100"/>
+                            <TextBlock Style="{StaticResource default}"
+                               Text="%"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="
+                               Описание услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="descriptionTb"
+                             Margin="10"
+                             Height="200"
+                             Width="400"
+                             TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Добавление фото:" 
+                                   Style="{StaticResource default}"/>
+                        <Image Width="400"
+                               Source="C:\Users\TiMON\Downloads\Telegram Desktop\20240926125546_IMG_1108.JPG"/>
+                        <Button Width="200" Content="выбрать фото" 
+                                Command="{Binding AddPhotoCommand}" />
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="addBtn" 
+                        Content="добавить"
+                        Click="addBtn_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

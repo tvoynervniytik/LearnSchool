@@ -12,7 +12,7 @@
         -->
         <Style TargetType="TextBlock" x:Key="default">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="27"/>
+            <Setter Property="FontSize" Value="30"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="Main">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
