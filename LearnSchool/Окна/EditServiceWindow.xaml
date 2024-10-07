@@ -153,7 +153,8 @@
                         <TextBlock Text="Добавление фото:" 
                                    TextAlignment="Center"
                                    Style="{StaticResource default}"/>
-                        <Image Width="500"
+                        <Image Width="300"
+                               Height="190"
                                x:Name="img"
                                Source="{Binding ImagePath}"/>
                         <StackPanel Orientation="Horizontal"
@@ -170,13 +171,38 @@
                                 Content="удалить фото" 
                                 Command="{Binding DelPhotoCommand}" Click="photoDelBtn_Click" 
                                 />
-                            
+
                         </StackPanel>
+                        <ListView x:Name="photosLv" Height="250" Width="400"
+                                  ItemsSource="{Binding servicePhotos}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Фото" Width="390">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding PhotoPath}"
+                                                       Width="370"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Width="auto"
+                                x:Name="photoDopBtn"
+                                Content="выбрать доп. фото" 
+                                Click="photoDopBtn_Click"
+                                />
+                        <Button Width="auto"
+                                x:Name="photoDopDelBtn"
+                                Content="удалить доп. фото" 
+                                Background="Red" Click="photoDopDelBtn_Click"/>
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="addBtn" 
                         Content="редактировать"
                         Width="230"
+                        Margin="0 -25 0 0"
                         Click="addBtn_Click"/>
             </StackPanel>
         </Grid>

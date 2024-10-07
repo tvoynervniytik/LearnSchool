@@ -23,7 +23,8 @@ namespace LearnSchool.Окна
     {
         public string ImagePath { get; set; }
         private static Service service; 
-        private static List<Service> services; 
+        private static List<Service> services;
+        private static List<ServicePhoto> servicePhotos { get; set; }
         public EditServiceWindow(Service serviceSended)
         {
             InitializeComponent();
@@ -38,8 +39,9 @@ namespace LearnSchool.Окна
                 ImagePath = service.MainImagePath;
             else
                 photoDelBtn.Visibility = Visibility.Hidden;
+            servicePhotos = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+            photosLv.ItemsSource = servicePhotos;
             services = new List<Service>(DBConnection.learnSchool.Service);
-            
             this.DataContext = this;
         }
 
@@ -188,6 +190,55 @@ namespace LearnSchool.Окна
         {
             DelPhotoCommand();
             photoDelBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void photoDopDelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (photosLv.SelectedItems != null)
+            {
+                var photo = photosLv.SelectedItem as ServicePhoto;
+                DBConnection.learnSchool.ServicePhoto.Remove(photo);
+                DBConnection.learnSchool.SaveChanges();
+                photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+            }
+        }
+        private void AddPhotoDop()
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
+                };
+
+                if (openFileDialog.ShowDialog().GetValueOrDefault())
+                {
+                    string selectedImagePath = openFileDialog.FileName;
+
+                    string fileName = System.IO.Path.GetFileName(selectedImagePath);
+                    string projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    string targetDirectory = System.IO.Path.Combine(projectDirectory, "Images");
+                    System.IO.Directory.CreateDirectory(targetDirectory);
+                    string newFilePath = System.IO.Path.Combine(targetDirectory, fileName);
+                    System.IO.File.Copy(selectedImagePath, newFilePath, true);
+
+
+                    ServicePhoto servicePhoto = new ServicePhoto();
+                    servicePhoto.ServiceID = service.ID;
+                    servicePhoto.PhotoPath = newFilePath;
+                    DBConnection.learnSchool.ServicePhoto.Add(servicePhoto);
+                    DBConnection.learnSchool.SaveChanges();
+                    photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void photoDopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddPhotoDop();
         }
     }
 }

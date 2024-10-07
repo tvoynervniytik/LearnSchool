@@ -31,6 +31,7 @@ namespace LearnSchool.Окна
         {
             InitializeComponent();
             services = new List<Service>(DBConnection.learnSchool.Service);
+            
             Functions.Authorization.backClick = false;
         }
 
@@ -128,33 +129,56 @@ namespace LearnSchool.Окна
         }
         private void AddPhoto()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog()
+            try
             {
-                Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
-            };
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
+                };
 
-            if (openFileDialog.ShowDialog().GetValueOrDefault())
+                if (openFileDialog.ShowDialog().GetValueOrDefault())
+                {
+                    string selectedImagePath = openFileDialog.FileName;
+
+                    string fileName = System.IO.Path.GetFileName(selectedImagePath);
+                    string projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    string targetDirectory = System.IO.Path.Combine(projectDirectory, "Images");
+                    System.IO.Directory.CreateDirectory(targetDirectory);
+                    string newFilePath = System.IO.Path.Combine(targetDirectory, fileName);
+                    System.IO.File.Copy(selectedImagePath, newFilePath, true);
+
+                    ImagePath = newFilePath;
+
+                    img.Source = new BitmapImage(new Uri(ImagePath));
+                    //this.Close();
+                }
+            }
+            catch(Exception ex) 
             {
-                string selectedImagePath = openFileDialog.FileName;
+                ImagePath = null;
 
-                string fileName = System.IO.Path.GetFileName(selectedImagePath);
-                string projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                string targetDirectory = System.IO.Path.Combine(projectDirectory, "Images");
-                System.IO.Directory.CreateDirectory(targetDirectory);
-                string newFilePath = System.IO.Path.Combine(targetDirectory, fileName);
-                System.IO.File.Copy(selectedImagePath, newFilePath, true);
-
-                ImagePath = newFilePath;
-
-                img.Source = new BitmapImage(new Uri(ImagePath));
-                //this.Close();
+                MessageBox.Show(ex.Message);
             }
         }
+        
 
         private void photoBtn_Click(object sender, RoutedEventArgs e)
         {
             AddPhoto();
+            if (ImagePath != null)
+            photoDelBtn.Visibility = Visibility.Visible;
         }
 
+        private void DelPhotoCommand()
+        {
+            ImagePath = "";
+            photoDelBtn.Visibility= Visibility.Hidden;
+            img.Source = null;
+        }
+        private void photoDelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DelPhotoCommand();
+            photoDelBtn.Visibility = Visibility.Hidden;
+        }
     }
 }

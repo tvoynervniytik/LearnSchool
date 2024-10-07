@@ -148,12 +148,21 @@
                         <Image Width="500"
                                x:Name="img"
                                Source="{Binding ImagePath}"/>
-                        <Button Width="200"
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Width="200"
                                 x:Name="photoBtn"
                                 Content="выбрать фото" 
                                 Command="{Binding AddPhotoCommand}" 
                                 Click="photoBtn_Click"
                                 />
+                            <Button Width="200"
+                                 x:Name="photoDelBtn"
+                                 Background="red"
+                                 Content="удалить фото" 
+                                    Visibility="Hidden"
+                                 Command="{Binding DelPhotoCommand}" Click="photoDelBtn_Click" 
+                                 />
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="addBtn" 
