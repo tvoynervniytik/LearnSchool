@@ -51,7 +51,7 @@ namespace LearnSchool.Окна
                 {
                     service.Cost = decimal.Parse(costTb.Text);
                     service.Title = nameTb.Text;
-                    service.Discount = Math.Round(double.Parse(discountTb.Text) / 100, 0);
+                    service.Discount = Math.Round(double.Parse(discountTb.Text), 0);
                     service.Duration = int.Parse(durationTb.Text);
                     service.MainImagePath = ImagePath;
                     if (service.Discount == 0)

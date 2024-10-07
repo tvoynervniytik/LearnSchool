@@ -61,6 +61,8 @@ namespace LearnSchool.Pages
         private void Refresh()
         {
             services = new List<Service>(DBConnection.learnSchool.Service);
+            countAll = services.Count;
+            countInDBTb.Text = countAll.ToString();
             if (Functions.Authorization.typeUser == 0)
             {
                 adminBtn.Visibility = Visibility.Visible;
@@ -180,6 +182,26 @@ namespace LearnSchool.Pages
             addServiceWindow.Show();
             window.Close();
 
+        }
+        private void HLDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var serviceDel = (sender as Hyperlink).DataContext as Service;
+            try
+            {
+                var result = MessageBox.Show("Вы действительно хотите удалить данную услугу?", "Подтверждение удаления услуги", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    DBConnection.learnSchool.Service.Remove(serviceDel);
+                    DBConnection.learnSchool.SaveChanges();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("This service cannot be removed");
+            }
+
+            Refresh();
         }
     }
 }
