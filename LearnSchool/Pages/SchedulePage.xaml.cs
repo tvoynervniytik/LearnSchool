@@ -52,7 +52,10 @@ namespace LearnSchool.Pages
             {
                 TimeSpan Time = service.StartTime - DateTime.Now;
                 service.TimeToStart = Time;
-                service.Color = "Red";
+                if (Time.TotalHours < 1)
+                    service.Color = "Red";
+                else
+                    service.Color = "Black";
             }
             
             scheduleLv.ItemsSource = clientService;
