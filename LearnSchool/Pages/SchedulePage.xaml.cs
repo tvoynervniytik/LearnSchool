@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace LearnSchool.Pages
 {
@@ -24,10 +25,15 @@ namespace LearnSchool.Pages
     public partial class SchedulePage : Page
     {
         private static List<ClientService> clientService {  get; set; }
+        private DispatcherTimer _timer;
         public SchedulePage()
         {
             InitializeComponent();
             Refresh();
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(30); // Интервал 30 секунд
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
 
         private void Refresh()
@@ -59,6 +65,10 @@ namespace LearnSchool.Pages
             }
             
             scheduleLv.ItemsSource = clientService;
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Refresh();
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
