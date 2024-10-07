@@ -160,8 +160,6 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding TimeToStart, StringFormat=' {0} ч' }"
-                                                   Foreground="{Binding Color}"/>
                                         <TextBlock Text="{Binding TimeToStart.Hours, StringFormat=' {0} ч' }"
                                                    Foreground="{Binding Color}"/>
                                         <TextBlock Text="{Binding TimeToStart.Minutes, StringFormat=' {0} мин' }"

@@ -44,16 +44,18 @@ namespace LearnSchool.Pages
                 )
                 ));
             clientService.Sort((cs1, cs2) => cs1.StartTime.CompareTo(cs2.StartTime));
+            //__________________
+            //MessageBox.Show(clientService[0].StartTime.ToString());
+            //MessageBox.Show(DateTime.Today.ToString());
+            //------------------
+            foreach (ClientService service in clientService)
+            {
+                TimeSpan Time = service.StartTime - DateTime.Now;
+                service.TimeToStart = Time;
+                service.Color = "Red";
+            }
+            
             scheduleLv.ItemsSource = clientService;
-
-            MessageBox.Show(clientService[0].StartTime.ToString());
-            MessageBox.Show(DateTime.Today.ToString());
-            //ClientService service = new ClientService();
-            //TimeSpan Time = service.StartTime - DateTime.Now;
-            //service.TimeToStart = Time;
-
-            //clientService.Add(service);
-            //scheduleLv.ItemsSource = clientService;
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
