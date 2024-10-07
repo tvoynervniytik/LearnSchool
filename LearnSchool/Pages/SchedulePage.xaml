@@ -144,7 +144,17 @@
                             </GridViewColumn.HeaderTemplate>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding StartTime}"/>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding StartTime.Day, StringFormat=' {0}'}"/>
+                                            <TextBlock Text="{Binding StartTime.Month, StringFormat='.{0}'}"/>
+                                            <TextBlock Text="{Binding StartTime.Year, StringFormat='.{0} г'}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding StartTime.Hour, StringFormat=' {0} ч'}"/>
+                                            <TextBlock Text="{Binding StartTime.Minute, StringFormat=' {0} мин'}"/>
+                                        </StackPanel>
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
