@@ -177,7 +177,7 @@
                                                FontSize="14" 
                                                Margin="5 0 0 0"/>
                                         <TextBlock Foreground="Gray"
-                                               Text="{Binding DurationInSeconds, StringFormat=' {0} минут'}"
+                                               Text="{Binding Duration, StringFormat=' {0} минут'}"
                                                FontSize="14"/>
                                     </StackPanel>
                                     <TextBlock Text="{Binding Discount, StringFormat='* скидка {0}% '}"

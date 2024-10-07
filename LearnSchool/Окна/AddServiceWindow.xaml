@@ -99,10 +99,10 @@
                                    TextWrapping="Wrap"
                                    Width="310"
                                    Style="{StaticResource default}"/>
-                            <TextBox x:Name="durationInSecTb" 
+                            <TextBox x:Name="durationTb" 
                                  Width="150"
                                  Margin="10"/>
-                            <TextBlock Text="сек"
+                            <TextBlock Text="мин"
                                    Margin="0 15 0 0"
                                    Style="{StaticResource default}"/>
                         </StackPanel>

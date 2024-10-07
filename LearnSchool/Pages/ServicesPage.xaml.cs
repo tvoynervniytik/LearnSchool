@@ -37,7 +37,7 @@ namespace LearnSchool.Pages
             countInDBTb.Text = countAll.ToString();
             countInRealTb.Text = services.Count.ToString();
             Refresh();
-            //servicesLv.ItemsSource = services;
+            servicesLv.ItemsSource = services;
             this.DataContext = this;
         }
 
@@ -60,9 +60,7 @@ namespace LearnSchool.Pages
 
         private void Refresh()
         {
-            services = services1;
-            //MessageBox.Show(services[4].Discount.ToString());
-            //MessageBox.Show(services1[4].Discount.ToString() + "1");
+            services = new List<Service>(DBConnection.learnSchool.Service);
             if (Functions.Authorization.typeUser == 0)
             {
                 adminBtn.Visibility = Visibility.Visible;
@@ -115,7 +113,7 @@ namespace LearnSchool.Pages
                 services.Sort((service1, service2) => ((int)service2.Cost).CompareTo((int)service1.CostDiscount));
             }
             else
-                services = services1;
+                services = new List<Service>(DBConnection.learnSchool.Service);
 
             //discount ComboBox
             if (saleCb.SelectedIndex == 0)

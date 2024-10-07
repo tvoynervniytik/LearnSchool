@@ -18,7 +18,6 @@ namespace LearnSchool.DB
         public ClientService()
         {
             this.DocumentByService = new HashSet<DocumentByService>();
-            this.ProductSale = new HashSet<ProductSale>();
         }
     
         public int ID { get; set; }
@@ -31,7 +30,5 @@ namespace LearnSchool.DB
         public virtual Service Service { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentByService> DocumentByService { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSale> ProductSale { get; set; }
     }
 }
