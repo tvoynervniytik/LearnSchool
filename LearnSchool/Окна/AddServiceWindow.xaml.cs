@@ -44,48 +44,55 @@ namespace LearnSchool.Окна
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            Service service = new Service();
-            if (costTb.Text != "" && nameTb.Text != "" && durationTb.Text != "" && discountTb.Text != "")
+            try
             {
-                service.Cost = decimal.Parse(costTb.Text);
-                service.Title = nameTb.Text;
-                service.Discount = Math.Round(double.Parse(discountTb.Text)/100, 0);
-                service.Duration = int.Parse(durationTb.Text);
-                service.MainImagePath = ImagePath;
-                if (service.Discount == 0)
+                Service service = new Service();
+                if (costTb.Text != "" && nameTb.Text != "" && durationTb.Text != "" && discountTb.Text != "")
                 {
-                    service.Width = 0;
-                    service.BackgroundColor = "AliceBlue";
-                    service.CostDiscount = service.Cost;
-                    service.Visibility = "Hidden";
-                }
-                else
-                {
-                    service.BackgroundColor = "#E7FABF";
-                    service.CostDiscount = service.Cost - service.Cost*((decimal)service.Discount/100);
-                    service.Visibility = "Visible";
-                }
-                if (descriptionTb.Text == "")
-                {
-                    var result = MessageBox.Show("Вы не заполнинили описание услуги. Оставить незаполненным?", "Описание услуги NULL", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
+                    service.Cost = decimal.Parse(costTb.Text);
+                    service.Title = nameTb.Text;
+                    service.Discount = Math.Round(double.Parse(discountTb.Text) / 100, 0);
+                    service.Duration = int.Parse(durationTb.Text);
+                    service.MainImagePath = ImagePath;
+                    if (service.Discount == 0)
                     {
-                        services.Add(service);
+                        service.Width = 0;
+                        service.BackgroundColor = "AliceBlue";
+                        service.CostDiscount = service.Cost;
+                        service.Visibility = "Hidden";
+                    }
+                    else
+                    {
+                        service.BackgroundColor = "#E7FABF";
+                        service.CostDiscount = service.Cost - service.Cost * ((decimal)service.Discount / 100);
+                        service.Visibility = "Visible";
+                    }
+                    if (descriptionTb.Text == "")
+                    {
+                        var result = MessageBox.Show("Вы не заполнинили описание услуги. Оставить незаполненным?", "Описание услуги NULL", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            services.Add(service);
+                            DBConnection.learnSchool.Service.Add(service);
+                            DBConnection.learnSchool.SaveChanges();
+                            CloseWindow();
+                        }
+                    }
+                    else
+                    {
+                        service.Description = descriptionTb.Text;
                         DBConnection.learnSchool.Service.Add(service);
                         DBConnection.learnSchool.SaveChanges();
                         CloseWindow();
                     }
                 }
                 else
-                {
-                    service.Description = descriptionTb.Text;
-                    DBConnection.learnSchool.Service.Add(service);
-                    DBConnection.learnSchool.SaveChanges();
-                    CloseWindow();
-                }
+                    MessageBox.Show("Заполните все данные!", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("Заполните все данные!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка ввода данных", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
