@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearnSchool.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,19 +17,21 @@ using System.Windows.Shapes;
 namespace LearnSchool.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AdminPage.xaml
+    /// Логика взаимодействия для SchedulePage.xaml
     /// </summary>
-    public partial class AdminPage : Page
+    public partial class SchedulePage : Page
     {
-        public AdminPage()
+        private static List<ClientService> clientService {  get; set; }
+        public SchedulePage()
         {
             InitializeComponent();
-            Functions.Authorization.backClick = false;
+            Refresh();
         }
 
-        private void servicesBtn_Click(object sender, RoutedEventArgs e)
+        private void Refresh()
         {
-            NavigationService.Navigate(new ServicesPage());
+            clientService = new List<ClientService>(DBConnection.learnSchool.ClientService);
+
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
@@ -39,11 +42,12 @@ namespace LearnSchool.Pages
                 Functions.Authorization.typeUser = 0;
                 NavigationService.Navigate(new StartingPage());
             }
+
         }
 
-        private void scheduleBtn_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SchedulePage());
+            NavigationService.Navigate(new AdminPage());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="LearnSchool.Pages.AdminPage"
+﻿<Page x:Class="LearnSchool.Pages.SchedulePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:LearnSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1450"
-      Title="AdminPage">
+      Title="SchedulePage">
 
     <Grid>
         <!--
@@ -26,30 +26,29 @@
         Цветные поля
         -->
         <Rectangle Grid.RowSpan="3"
-                   Fill="AliceBlue"/>
+            Fill="AliceBlue"/>
         <Rectangle Grid.ColumnSpan="2"
-                   Fill="AliceBlue"/>
+            Fill="AliceBlue"/>
 
         <!--
         Лого и название
         -->
         <StackPanel Orientation="Horizontal" 
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Center" Margin="0,0,0,1">
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center" Margin="0,0,0,1">
             <Image Style="{StaticResource logo}" 
-                   Source="/Images/school_logo.png"/>
+           Source="/Images/school_logo.png"/>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Learn"
-                           Style="{StaticResource default}"
-                           Margin="0 0 0 -18"/>
+                   Style="{StaticResource default}"
+                   Margin="0 0 0 -18"/>
                 <TextBlock Text="school"
-                           Style="{StaticResource default}"/>
+                    Style="{StaticResource default}"/>
             </StackPanel>
         </StackPanel>
 
-
         <!--
-        Вход как администратор
+        Выход как администратор
         -->
         <Button Grid.Column="1"
                 Style="{StaticResource admin}"
@@ -58,27 +57,23 @@
             <Run Text="Выйти из режима администратора" 
                  TextDecorations="Underline"/>
         </Button>
-        
+
+        <!--
+        Кнопка назад
+        -->
+        <Button Style="{StaticResource back}" 
+                Grid.Row="1" Click="Button_Click"/>
+
         <!--
         Заголовок
         -->
-        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Main}">
-                Панель навигации
-            </TextBlock>
+        <TextBlock Text="Ближайшие записи" 
+                   Grid.Row="1" Grid.Column="1"
+                   Style="{StaticResource Main}"/>
 
         <!--
         Основная часть
         -->
-        <StackPanel Grid.Column="1" 
-                    Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <Button Content="услуги" 
-                        x:Name="servicesBtn" Click="servicesBtn_Click"/>
-            <Button Content="расписание"
-                        Width="200"
-                        x:Name="scheduleBtn" Click="scheduleBtn_Click"/>
-        </StackPanel>
+
     </Grid>
 </Page>
