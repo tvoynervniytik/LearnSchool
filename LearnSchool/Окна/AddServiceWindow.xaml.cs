@@ -25,6 +25,7 @@ namespace LearnSchool.Окна
     public partial class AddServiceWindow : Window
     {
         public string ImagePath { get; set; }
+        public string ImageDirectory { get; set; }
         private static List<Service> services {  get; set; }
         public AddServiceWindow()
         {
@@ -53,7 +54,8 @@ namespace LearnSchool.Окна
                 Service service = new Service();
                 if (costTb.Text != "" && nameTb.Text != "" && durationTb.Text != "" && discountTb.Text != "")
                 {
-                    if (services.Where(i => i.Title == nameTb.Text) != null)
+                    if (services.FirstOrDefault(i => i.Title == nameTb.Text) != null
+                        && services.FirstOrDefault(i => i.Title == nameTb.Text) != service)
                         MessageBox.Show("Услуга с таким названием уже существует", "Ошибка названия", MessageBoxButton.OK, MessageBoxImage.Error);
                     else
                     {
@@ -133,7 +135,28 @@ namespace LearnSchool.Окна
 
             if (openFileDialog.ShowDialog().GetValueOrDefault())
             {
-                ImagePath = openFileDialog.FileName;
+                string selectedImagePath = openFileDialog.FileName;
+
+                // Создайте новое имя файла (уникальное)
+                string fileName = System.IO.Path.GetFileName(selectedImagePath);
+
+                // Получите путь к папке проекта
+                string projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                string targetDirectory = System.IO.Path.Combine(projectDirectory, "Images");
+
+                // Создайте папку, если она не существует
+                System.IO.Directory.CreateDirectory(targetDirectory);
+
+                // Объедините полный путь к файлу в папке проекта
+                string newFilePath = System.IO.Path.Combine(targetDirectory, fileName);
+
+                // Скопируйте файл в папку проекта
+                System.IO.File.Copy(selectedImagePath, newFilePath, true);
+
+
+                //df
+                ImagePath = newFilePath;
+
                 img.Source = new BitmapImage(new Uri(ImagePath));
                 //this.Close();
             }
