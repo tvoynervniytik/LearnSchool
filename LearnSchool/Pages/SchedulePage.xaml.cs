@@ -1,6 +1,7 @@
 ﻿using LearnSchool.DB;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,12 @@ namespace LearnSchool.Pages
 
         private void Refresh()
         {
-            clientService = new List<ClientService>(DBConnection.learnSchool.ClientService);
+            clientService = new List<ClientService>(DBConnection.learnSchool.ClientService.Where(i => i.StartTime > DateTime.Now));
+            clientService.Sort((cs1, cs2) => cs1.StartTime.CompareTo(cs2.StartTime));
+            scheduleLv.ItemsSource = clientService;
 
+            //ClientService service = new ClientService();
+            //TimeSpan Time = service.StartTime - DateTime.Now;
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)

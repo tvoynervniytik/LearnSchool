@@ -74,6 +74,104 @@
         <!--
         Основная часть
         -->
-
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Margin="0 20"
+                    Grid.Column="1" Grid.Row="2">
+            <ListView x:Name="scheduleLv"
+                      ItemsSource="{Binding serviceClient}"
+                       d:ItemsSource="{d:SampleData ItemCount=9}"
+                      Height="600" Width="1200">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="270">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="Услуга"/>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Service.Title}"
+                                               TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="156">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="Клиент"/>
+                                        <TextBlock Text="ФИО клиента"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Client.FirstName}"/>
+                                        <TextBlock Text="{Binding Client.LastName}"/>
+                                        <TextBlock Text="{Binding Client.Patronymic}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="250">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock/>
+                                        <TextBlock Text="Данные"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Client.Email}"/>
+                                        <TextBlock Text="{Binding Client.Phone}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="250">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="Запись"/>
+                                        <TextBlock Text="Дата и время"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StartTime}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="212">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text=""/>
+                                        <TextBlock Text="До начала услуги"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding TimeToStart.Hours, StringFormat=' {0} ч' }"
+                                                   Foreground="{Binding Color}"/>
+                                        <TextBlock Text="{Binding TimeToStart.Minutes, StringFormat=' {0} мин' }"
+                                                   Foreground="{Binding Color}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        
     </Grid>
 </Page>

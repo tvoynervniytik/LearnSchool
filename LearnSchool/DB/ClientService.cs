@@ -25,6 +25,8 @@ namespace LearnSchool.DB
         public System.DateTime StartTime { get; set; }
         public int ClientID { get; set; }
         public string Comment { get; set; }
+        public Nullable<System.TimeSpan> TimeToStart { get; set; }
+        public string Color { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Service Service { get; set; }
