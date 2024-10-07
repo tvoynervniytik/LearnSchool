@@ -1,0 +1,184 @@
+﻿<Window x:Class="LearnSchool.Окна.EditServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LearnSchool.Окна"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Окно редактирования услуги" Height="900" Width="1450">
+    <Grid>
+        <Grid>
+            <!--
+        Разметка страницы
+        -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--
+        Цветные поля
+        -->
+            <Rectangle Grid.RowSpan="3"
+                   Fill="AliceBlue"/>
+            <Rectangle Grid.ColumnSpan="2"
+                   Fill="AliceBlue"/>
+
+            <!--
+        Лого и название
+        -->
+            <StackPanel Orientation="Horizontal" 
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center" Margin="0,0,0,1">
+                <Image Style="{StaticResource logo}" 
+                   Source="/Images/school_logo.png"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Learn"
+                           Style="{StaticResource default}"
+                           Margin="0 0 0 -18"/>
+                    <TextBlock Text="school"
+                           Style="{StaticResource default}"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <!--
+        Вход как администратор
+        -->
+            <Button Grid.Column="1"
+                Style="{StaticResource admin}"
+                x:Name="exitBtn" Width="280" Click="exitBtn_Click"
+                >
+                <Run Text="Выйти из режима администратора" 
+                 TextDecorations="Underline"/>
+            </Button>
+
+            <!--
+            Кнопка назад
+            -->
+            <Button Style="{StaticResource back}" 
+                Grid.Row="1" Click="Button_Click"/>
+
+            <!--
+        Заголовок
+        -->
+            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource Main}">
+                Редактирование услуги
+            </TextBlock>
+
+            <!--
+        Основная часть
+        -->
+            <StackPanel Grid.Column="1" 
+                    Grid.Row="2"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 10 10">
+                            <TextBlock Text="ID услуги:"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="idTb"
+                                     IsEnabled="False"
+                                     Margin="10"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 10 0">
+                            <TextBlock Text="
+                               Наименование услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="nameTb"
+                             Margin="10"
+                             Width="400"
+                             Height="100"
+                             TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Продолжительность:"
+                                   TextWrapping="Wrap"
+                                   Width="310"
+                                   Style="{StaticResource default}"/>
+                            <TextBox x:Name="durationTb" 
+                                 Width="150"
+                                 Margin="10"/>
+                            <TextBlock Text="мин"
+                                   Margin="0 15 0 0"
+                                   Style="{StaticResource default}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Стоимость услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="costTb" 
+                             Width="150"
+                             Margin="10 0"/>
+                            <TextBlock Text="₽" 
+                               Style="{StaticResource default}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Скидка услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="discountTb" 
+                             Margin="10"
+                             Width="100"/>
+                            <TextBlock Style="{StaticResource default}"
+                               Text="%"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 10 10">
+                            <TextBlock Text="
+                               Описание услуги:"
+                               TextWrapping="Wrap"
+                               Width="310"
+                               Style="{StaticResource default}"/>
+                            <TextBox x:Name="descriptionTb"
+                             Margin="10"
+                             Height="200"
+                             Width="400"
+                             TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Добавление фото:" 
+                                   TextAlignment="Center"
+                                   Style="{StaticResource default}"/>
+                        <Image Width="500"
+                               x:Name="img"
+                               Source="{Binding ImagePath}"/>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                        <Button Width="200"
+                                x:Name="photoBtn"
+                                Content="выбрать фото" 
+                                Command="{Binding AddPhotoCommand}" 
+                                Click="photoBtn_Click"
+                                />
+                        <Button Width="200"
+                                x:Name="photoDelBtn"
+                                Background="red"
+                                Content="удалить фото" 
+                                Command="{Binding DelPhotoCommand}" Click="photoDelBtn_Click" 
+                                />
+                            
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="addBtn" 
+                        Content="редактировать"
+                        Width="230"
+                        Click="addBtn_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -145,8 +145,6 @@ namespace LearnSchool.Pages
             servicesLv.ItemsSource = services;
         }
 
-        
-
         private void saleCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Refresh();
@@ -200,6 +198,16 @@ namespace LearnSchool.Pages
             {
                 MessageBox.Show("This service cannot be removed");
             }
+
+            Refresh();
+        }
+        private void HLEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var serviceDEdit= (sender as Hyperlink).DataContext as Service;
+            EditServiceWindow editServiceWindow = new EditServiceWindow(serviceDEdit);
+            Window window = Window.GetWindow(this);
+            editServiceWindow.Show();
+            window.Close();
 
             Refresh();
         }

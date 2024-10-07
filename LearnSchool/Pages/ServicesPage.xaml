@@ -192,6 +192,7 @@
                                         <TextBlock FontSize="14">
                                         
                                             <Hyperlink Foreground="Gray"
+                                                       Click="HLEdit_Click"
                                                        x:Name="HLedit">
                                                <Border BorderBrush="Gray" BorderThickness="1">
                                                     <TextBlock Text=" редактировать " Margin="5 0 0 0"/>
