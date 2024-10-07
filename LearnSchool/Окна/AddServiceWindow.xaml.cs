@@ -53,46 +53,50 @@ namespace LearnSchool.Окна
                 Service service = new Service();
                 if (costTb.Text != "" && nameTb.Text != "" && durationTb.Text != "" && discountTb.Text != "")
                 {
-
-                    if (int.Parse(durationTb.Text) <= 0 || int.Parse(durationTb.Text) > 240)
-                        MessageBox.Show("Длительность курса не может быть отрицательной или более 4 часов (240 минут)", "Ошибка ввода длительноости", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (services.Where(i => i.Title == nameTb.Text) != null)
+                        MessageBox.Show("Услуга с таким названием уже существует", "Ошибка названия", MessageBoxButton.OK, MessageBoxImage.Error);
                     else
                     {
-                        service.Duration = int.Parse(durationTb.Text);
-                        service.Cost = decimal.Parse(costTb.Text);
-                        service.Title = nameTb.Text;
-                        service.Discount = Math.Round(double.Parse(discountTb.Text), 0);
-                        service.MainImagePath = ImagePath;
-                        if (service.Discount == 0)
-                        {
-                            service.Width = 0;
-                            service.BackgroundColor = "AliceBlue";
-                            service.CostDiscount = service.Cost;
-                            service.Visibility = "Hidden";
-                        }
+                        if (int.Parse(durationTb.Text) <= 0 || int.Parse(durationTb.Text) > 240)
+                            MessageBox.Show("Длительность курса не может быть отрицательной или более 4 часов (240 минут)", "Ошибка ввода длительноости", MessageBoxButton.OK, MessageBoxImage.Error);
                         else
                         {
-                            service.BackgroundColor = "#E7FABF";
-                            service.CostDiscount = service.Cost - service.Cost * ((decimal)service.Discount / 100);
-                            service.Visibility = "Visible";
-                        }
-                        if (descriptionTb.Text == "")
-                        {
-                            var result = MessageBox.Show("Вы не заполнинили описание услуги. Оставить незаполненным?", "Описание услуги NULL", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (result == MessageBoxResult.Yes)
+                            service.Duration = int.Parse(durationTb.Text);
+                            service.Cost = decimal.Parse(costTb.Text);
+                            service.Title = nameTb.Text;
+                            service.Discount = Math.Round(double.Parse(discountTb.Text), 0);
+                            service.MainImagePath = ImagePath;
+                            if (service.Discount == 0)
                             {
-                                services.Add(service);
+                                service.Width = 0;
+                                service.BackgroundColor = "AliceBlue";
+                                service.CostDiscount = service.Cost;
+                                service.Visibility = "Hidden";
+                            }
+                            else
+                            {
+                                service.BackgroundColor = "#E7FABF";
+                                service.CostDiscount = service.Cost - service.Cost * ((decimal)service.Discount / 100);
+                                service.Visibility = "Visible";
+                            }
+                            if (descriptionTb.Text == "")
+                            {
+                                var result = MessageBox.Show("Вы не заполнинили описание услуги. Оставить незаполненным?", "Описание услуги NULL", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                if (result == MessageBoxResult.Yes)
+                                {
+                                    services.Add(service);
+                                    DBConnection.learnSchool.Service.Add(service);
+                                    DBConnection.learnSchool.SaveChanges();
+                                    CloseWindow();
+                                }
+                            }
+                            else
+                            {
+                                service.Description = descriptionTb.Text;
                                 DBConnection.learnSchool.Service.Add(service);
                                 DBConnection.learnSchool.SaveChanges();
                                 CloseWindow();
                             }
-                        }
-                        else
-                        {
-                            service.Description = descriptionTb.Text;
-                            DBConnection.learnSchool.Service.Add(service);
-                            DBConnection.learnSchool.SaveChanges();
-                            CloseWindow();
                         }
                     }
                 }
