@@ -25,9 +25,11 @@ namespace LearnSchool.Окна
     public partial class AddServiceWindow : Window
     {
         public string ImagePath { get; set; }
+        private static List<Service> services {  get; set; }
         public AddServiceWindow()
         {
             InitializeComponent();
+            services = new List<Service>(DBConnection.learnSchool.Service);
             Functions.Authorization.backClick = false;
         }
 
@@ -42,7 +44,34 @@ namespace LearnSchool.Окна
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            CloseWindow();
+            Service service = new Service();
+            if (costTb.Text != "" && nameTb.Text != "" && durationInSecTb.Text != "" && discountTb.Text != "")
+            {
+                service.Cost = decimal.Parse(costTb.Text);
+                service.Title = nameTb.Text;
+                service.Discount = Math.Round(double.Parse(discountTb.Text)/100, 0);
+                service.DurationInSeconds = int.Parse(durationInSecTb.Text);
+                service.MainImagePath = ImagePath;
+                if (descriptionTb.Text == "")
+                {
+                    var result = MessageBox.Show("Вы не заполнинили описание услуги. Оставить незаполненным?", "Описание услуги NULL", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        services.Add(service);
+                        DBConnection.learnSchool.SaveChanges();
+                        CloseWindow();
+                    }
+                }
+                else
+                {
+                    DBConnection.learnSchool.Service.Add(service);
+                    DBConnection.learnSchool.SaveChanges();
+                    CloseWindow();
+                }
+            }
+            else
+                MessageBox.Show("Заполните все данные!", "", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

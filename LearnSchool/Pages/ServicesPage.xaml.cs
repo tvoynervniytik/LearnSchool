@@ -24,19 +24,20 @@ namespace LearnSchool.Pages
     public partial class ServicesPage : Page
     {
         private static List<Service> services { get; set;}
+        private static List<Service> services1 = new List<Service>(DBConnection.learnSchool.Service);
         private static bool isAdmin = false;
-        private static int countAll = new List<Service>(DBConnection.learnSchool.Service).Count;
-        private static int countReal;
-        //private static string VisibilityAdmin;
+        private static int countAll;
+        
         public ServicesPage()
         {
             InitializeComponent();
             Functions.Authorization.backClick = false;
             services = new List<Service>(DBConnection.learnSchool.Service);
+            countAll = new List<Service>(DBConnection.learnSchool.Service).Count;
             countInDBTb.Text = countAll.ToString();
             countInRealTb.Text = services.Count.ToString();
-
             Refresh();
+            //servicesLv.ItemsSource = services;
             this.DataContext = this;
         }
 
@@ -59,7 +60,9 @@ namespace LearnSchool.Pages
 
         private void Refresh()
         {
-
+            services = services1;
+            //MessageBox.Show(services[4].Discount.ToString());
+            //MessageBox.Show(services1[4].Discount.ToString() + "1");
             if (Functions.Authorization.typeUser == 0)
             {
                 adminBtn.Visibility = Visibility.Visible;
@@ -77,33 +80,32 @@ namespace LearnSchool.Pages
 
             foreach (Service service in services)
             {
-                service.DurationInSeconds = service.DurationInSeconds / 60;
+                //    service.DurationInSeconds = service.DurationInSeconds / 60;
                 service.Cost = Math.Round(service.Cost, 0);
+                service.CostDiscount = Math.Round((decimal)service.CostDiscount, 0);
+                //    service.Discount = service.Discount * 100;
 
-                if (service.Discount > 0)
-                {
-                    service.Visibility = Visibility.Visible.ToString();
-                    service.CostDiscount = Math.Round(service.Cost * (1 - (decimal)service.Discount), 0);
-                    service.BackgroundColor = "#E7FABF";
-                }
-                else
-                {
-                    service.Visibility = Visibility.Hidden.ToString();
-                    service.CostDiscount = service.Cost;
-                    service.Width = 0;
-                    service.BackgroundColor = "AliceBlue";
-                }
-                if (isAdmin)
-                {
-                    //VisibilityAdmin = "Visible";
-                    service.VisibilityAdmin = Visibility.Visible.ToString();
-                }
-                else
-                    service.VisibilityAdmin = Visibility.Hidden.ToString();
-                service.Discount = service.Discount * 100;
+                //    if (service.Discount > 0)
+                //    {
+                //        service.Visibility = Visibility.Visible.ToString();
+                //        service.CostDiscount = Math.Round(service.Cost * (100 - (decimal)service.Discount), 0);
+                //        service.BackgroundColor = "#E7FABF";
+                //    }
+                //    else
+                //    {
+                //        service.Visibility = Visibility.Hidden.ToString();
+                //        service.CostDiscount = service.Cost;
+                //        service.Width = 0;
+                //        service.BackgroundColor = "AliceBlue";
+                //    }
+                //    if (isAdmin)
+                //    {
+                //        service.VisibilityAdmin = Visibility.Visible.ToString();
+                //    }
+                //    else
+                //        service.VisibilityAdmin = Visibility.Hidden.ToString();
 
             }
-            services = new List<Service>(DBConnection.learnSchool.Service);
             if (costCb.SelectedIndex == 0)
             {
                 services.Sort((service1, service2) => ((int)service1.CostDiscount).CompareTo((int)service2.CostDiscount));
@@ -113,7 +115,7 @@ namespace LearnSchool.Pages
                 services.Sort((service1, service2) => ((int)service2.Cost).CompareTo((int)service1.CostDiscount));
             }
             else
-                services = new List<Service>(DBConnection.learnSchool.Service);
+                services = services1;
 
             //discount ComboBox
             if (saleCb.SelectedIndex == 0)
@@ -154,7 +156,6 @@ namespace LearnSchool.Pages
         {
             services = new List<Service>(DBConnection.learnSchool.Service);
             saleCb.SelectedItem = null;
-            services = services;
             Refresh();
         }
 
@@ -177,8 +178,8 @@ namespace LearnSchool.Pages
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
             AddServiceWindow addServiceWindow = new AddServiceWindow();
-            addServiceWindow.Show();
             Window window = Window.GetWindow(this);
+            addServiceWindow.Show();
             window.Close();
 
         }

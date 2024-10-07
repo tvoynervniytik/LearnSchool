@@ -143,6 +143,7 @@
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="Добавление фото:" 
+                                   TextAlignment="Center"
                                    Style="{StaticResource default}"/>
                         <Image Width="500"
                                x:Name="img"
@@ -150,7 +151,9 @@
                         <Button Width="200"
                                 x:Name="photoBtn"
                                 Content="выбрать фото" 
-                                Command="{Binding AddPhotoCommand}" Click="photoBtn_Click" />
+                                Command="{Binding AddPhotoCommand}" 
+                                Click="photoBtn_Click"
+                                />
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="addBtn" 
