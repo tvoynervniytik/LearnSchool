@@ -98,12 +98,12 @@ namespace LearnSchool.Pages
                 //        service.Width = 0;
                 //        service.BackgroundColor = "AliceBlue";
                 //    }
-                //    if (isAdmin)
-                //    {
-                //        service.VisibilityAdmin = Visibility.Visible.ToString();
-                //    }
-                //    else
-                //        service.VisibilityAdmin = Visibility.Hidden.ToString();
+                if (isAdmin)
+                {
+                    service.VisibilityAdmin = Visibility.Visible.ToString();
+                }
+                else
+                    service.VisibilityAdmin = Visibility.Hidden.ToString();
 
             }
             if (costCb.SelectedIndex == 0)
