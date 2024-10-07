@@ -56,8 +56,12 @@ namespace LearnSchool.Pages
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Refresh();
-            Functions.Authorization.typeUser = 0;
+            var result = MessageBox.Show("Вы действительно хотите выйти из режима администратора?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Refresh();
+                Functions.Authorization.typeUser = 0;
+            }
         }
     }
 }

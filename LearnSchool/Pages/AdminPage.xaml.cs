@@ -33,8 +33,12 @@ namespace LearnSchool.Pages
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Functions.Authorization.typeUser = 0;
-            NavigationService.Navigate(new StartingPage());
+            var result = MessageBox.Show("Вы действительно хотите выйти из режима администратора?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Functions.Authorization.typeUser = 0;
+                NavigationService.Navigate(new StartingPage());
+            }
         }
     }
 }

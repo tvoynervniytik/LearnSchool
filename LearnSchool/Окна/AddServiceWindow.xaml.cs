@@ -35,11 +35,15 @@ namespace LearnSchool.Окна
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Functions.Authorization.typeUser = 0;
-            Window window = Window.GetWindow(this);
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            window.Close();
+            var result = MessageBox.Show("Вы действительно хотите выйти из режима администратора?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Functions.Authorization.typeUser = 0;
+                Window window = Window.GetWindow(this);
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                window.Close();
+            }
         }
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
