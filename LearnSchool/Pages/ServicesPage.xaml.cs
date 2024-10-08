@@ -215,5 +215,11 @@ namespace LearnSchool.Pages
 
             Refresh();
         }
+
+        private void servicesLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NavigationService.Navigate(new AddSchedulePage(servicesLv.SelectedItem as Service));
+        }
+
     }
 }

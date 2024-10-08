@@ -142,7 +142,8 @@
                     d:ItemsSource="{d:SampleData ItemCount=9}"
                     BorderThickness="4"
                       BorderBrush="#04A0FF"
-                    Background="AliceBlue">
+                    Background="AliceBlue" 
+                      SelectionChanged="servicesLv_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="1"

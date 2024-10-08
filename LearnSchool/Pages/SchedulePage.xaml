@@ -183,6 +183,17 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <TextBlock TextAlignment="Right" 
+                           Text="Обновление страницы через 00:"
+                           Foreground="Gray"
+                           Style="{StaticResource default}"/>
+                <TextBlock x:Name="secTb" TextAlignment="Right"
+                           Text="{Binding seconds}"
+                           Style="{StaticResource default}"
+                           Foreground="Gray"/>
+            </StackPanel>
         </StackPanel>
         
     </Grid>

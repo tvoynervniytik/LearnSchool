@@ -26,18 +26,27 @@ namespace LearnSchool.Pages
     {
         private static List<ClientService> clientService {  get; set; }
         private DispatcherTimer _timer;
+        private DispatcherTimer _timerS;
+        private int seconds;
         public SchedulePage()
         {
             InitializeComponent();
             Refresh();
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(30); // Интервал 30 секунд
+            _timer.Interval = TimeSpan.FromSeconds(30);
             _timer.Tick += Timer_Tick;
             _timer.Start();
+
+            _timerS = new DispatcherTimer();
+            _timerS.Interval = TimeSpan.FromSeconds(1); 
+            _timerS.Tick += Timer_Tick_S;
+            _timerS.Start();
         }
 
         private void Refresh()
         {
+            seconds = 30;
+            secTb.Text = seconds.ToString();
             DateTime today = DateTime.Today;
             DateTime yesterday = DateTime.Today.AddDays(1);
             clientService = new List<ClientService>(DBConnection.learnSchool.ClientService.
@@ -69,6 +78,14 @@ namespace LearnSchool.Pages
         private void Timer_Tick(object sender, EventArgs e)
         {
             Refresh();
+        }
+        private void Timer_Tick_S(object sender, EventArgs e)
+        {
+            seconds -= 1;
+            if (seconds < 9)
+            secTb.Text = "0" + seconds.ToString();
+            else
+                secTb.Text = seconds.ToString();
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
