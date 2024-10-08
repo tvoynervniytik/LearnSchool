@@ -136,11 +136,12 @@ namespace LearnSchool.Pages
                 clientService.ClientID = client.ID;
                 TimeSpan time = DateTime.Parse(timeService).TimeOfDay;
 
-                var startTimeString = dateDp.SelectedDate.ToString().Substring(0, 11) + time.ToString();
-                clientService.StartTime = DateTime.Parse(startTimeString.Trim());
+                var startTime = dateDp.SelectedDate.ToString().Substring(0, 11) + time.ToString();
+                clientService.StartTime = DateTime.Parse(startTime.Trim());
 
                 DBConnection.learnSchool.ClientService.Add(clientService);
                 DBConnection.learnSchool.SaveChanges();
+                MessageBox.Show($"Добавлена запись на услугу \"{service1.Title}\" клиента {client.FirstName} {client.LastName[0]}.{client.Patronymic[0]}. на {startTime}");
                 NavigationService.Navigate(new ServicesPage());
             }
         }
