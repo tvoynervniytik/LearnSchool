@@ -33,6 +33,7 @@ namespace LearnSchool.Окна
             title = service.Title;
             costTb.Text = service.Cost.ToString();
             nameTb.Text = service.Title.ToString();
+            if (descriptionTb.Text != "")
             descriptionTb.Text = service.Description.ToString();
             discountTb.Text = service.Discount.ToString();
             durationTb.Text = service.Duration.ToString();
@@ -41,7 +42,7 @@ namespace LearnSchool.Окна
                 ImagePath = service.MainImagePath;
             else
                 photoDelBtn.Visibility = Visibility.Hidden;
-            servicePhotos = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+            servicePhotos = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto.Where(i => i.ServiceID == service.ID));
             photosLv.ItemsSource = servicePhotos;
             services = new List<Service>(DBConnection.learnSchool.Service);
             this.DataContext = this;
@@ -207,7 +208,7 @@ namespace LearnSchool.Окна
                 var photo = photosLv.SelectedItem as ServicePhoto;
                 DBConnection.learnSchool.ServicePhoto.Remove(photo);
                 DBConnection.learnSchool.SaveChanges();
-                photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+                photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto.Where(i => i.ServiceID == service.ID));
             }
         }
         private void AddPhotoDop()
@@ -236,7 +237,7 @@ namespace LearnSchool.Окна
                     servicePhoto.PhotoPath = newFilePath;
                     DBConnection.learnSchool.ServicePhoto.Add(servicePhoto);
                     DBConnection.learnSchool.SaveChanges();
-                    photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto);
+                    photosLv.ItemsSource = new List<ServicePhoto>(DBConnection.learnSchool.ServicePhoto.Where(i => i.ServiceID == service.ID));
                 }
             }
             catch(Exception ex)

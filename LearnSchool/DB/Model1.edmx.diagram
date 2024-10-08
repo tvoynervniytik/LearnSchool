@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1cf7c9cd7add471e942638f0f3247748" Name="Diagram1">
-        <EntityTypeShape EntityType="LearnSchoolModel.Client" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+      <Diagram DiagramId="a9bf907766ce4d7594de0bee37542a9f" Name="Diagram1">
+        <EntityTypeShape EntityType="LearnSchoolModel.Client" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LearnSchoolModel.ClientService" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LearnSchoolModel.DocumentByService" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LearnSchoolModel.Gender" Width="1.5" PointX="1.5" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LearnSchoolModel.Service" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LearnSchoolModel.ServicePhoto" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="LearnSchoolModel.DocumentByService" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="LearnSchoolModel.Gender" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="LearnSchoolModel.Service" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="LearnSchoolModel.ServicePhoto" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LearnSchoolModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LearnSchoolModel.Tag" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LearnSchoolModel.Tag" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
         <AssociationConnector Association="LearnSchoolModel.FK_Client_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="LearnSchoolModel.FK_ClientService_Client" ManuallyRouted="false" />
         <AssociationConnector Association="LearnSchoolModel.FK_ClientService_Service" ManuallyRouted="false" />

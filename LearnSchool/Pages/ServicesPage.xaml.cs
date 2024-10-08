@@ -171,32 +171,41 @@ namespace LearnSchool.Pages
         private void HLDelete_Click(object sender, RoutedEventArgs e)
         {
             var serviceDel = (sender as Hyperlink).DataContext as Service;
-            try
+            List<ClientService> clientServices = new List<ClientService>(DBConnection.learnSchool.ClientService);
+            if (clientServices.Where(i => i.ServiceID == serviceDel.ID).Count() == 0)
             {
-                var result = MessageBox.Show("Вы действительно хотите удалить данную услугу?", "Подтверждение удаления услуги", 
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
                 {
-                    DBConnection.learnSchool.Service.Remove(serviceDel);
-                    DBConnection.learnSchool.SaveChanges();
+                    try
+                    {
+                        var result = MessageBox.Show("Вы действительно хотите удалить данную услугу?", "Подтверждение удаления услуги",
+                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            DBConnection.learnSchool.Service.Remove(serviceDel);
+                            DBConnection.learnSchool.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    Refresh();
                 }
             }
-            catch
-            {
-                MessageBox.Show("This service cannot be removed");
-            }
-
-            Refresh();
+            else
+                MessageBox.Show("Невозможно удалить услугу: есть записи на эту услугу", "Ошибка удаления услуги", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void HLEdit_Click(object sender, RoutedEventArgs e)
         {
             var serviceDEdit= (sender as Hyperlink).DataContext as Service;
-            EditServiceWindow editServiceWindow = new EditServiceWindow(serviceDEdit);
-            Window window = Window.GetWindow(this);
-            editServiceWindow.Show();
-            window.Close();
+            
+                EditServiceWindow editServiceWindow = new EditServiceWindow(serviceDEdit);
+                Window window = Window.GetWindow(this);
+                editServiceWindow.Show();
+                window.Close();
 
-            Refresh();
+                Refresh();
         }
 
         private void servicesLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
