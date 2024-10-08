@@ -80,24 +80,8 @@ namespace LearnSchool.Pages
 
             foreach (Service service in services)
             {
-                //    service.DurationInSeconds = service.DurationInSeconds / 60;
                 service.Cost = Math.Round(service.Cost, 0);
                 service.CostDiscount = Math.Round((decimal)service.CostDiscount, 0);
-                //    service.Discount = service.Discount * 100;
-
-                //    if (service.Discount > 0)
-                //    {
-                //        service.Visibility = Visibility.Visible.ToString();
-                //        service.CostDiscount = Math.Round(service.Cost * (100 - (decimal)service.Discount), 0);
-                //        service.BackgroundColor = "#E7FABF";
-                //    }
-                //    else
-                //    {
-                //        service.Visibility = Visibility.Hidden.ToString();
-                //        service.CostDiscount = service.Cost;
-                //        service.Width = 0;
-                //        service.BackgroundColor = "AliceBlue";
-                //    }
                 if (isAdmin)
                 {
                     service.VisibilityAdmin = Visibility.Visible.ToString();
@@ -112,12 +96,11 @@ namespace LearnSchool.Pages
             }
             else if (costCb.SelectedIndex == 1)
             {
-                services.Sort((service1, service2) => ((int)service2.Cost).CompareTo((int)service1.CostDiscount));
+                services.Sort((service1, service2) => ((int)service2.CostDiscount).CompareTo((int)service1.CostDiscount));
             }
             else
                 services = new List<Service>(DBConnection.learnSchool.Service);
 
-            //discount ComboBox
             if (saleCb.SelectedIndex == 0)
             {
                 services = services.Where(i => i.Discount >= 0 & i.Discount < 5 ).ToList();

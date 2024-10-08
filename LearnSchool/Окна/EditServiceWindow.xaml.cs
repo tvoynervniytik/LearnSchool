@@ -24,11 +24,13 @@ namespace LearnSchool.Окна
         public string ImagePath { get; set; }
         private static Service service; 
         private static List<Service> services;
+        private static string title;
         private static List<ServicePhoto> servicePhotos { get; set; }
         public EditServiceWindow(Service serviceSended)
         {
             InitializeComponent();
             service = serviceSended;
+            title = service.Title;
             costTb.Text = service.Cost.ToString();
             nameTb.Text = service.Title.ToString();
             descriptionTb.Text = service.Description.ToString();
@@ -61,10 +63,16 @@ namespace LearnSchool.Окна
             {
                 if (costTb.Text != "" && nameTb.Text != "" && durationTb.Text != "" && discountTb.Text != "")
                 {
-
-                    if (services.Where(i => i.Title == nameTb.Text) != null 
-                        && services.FirstOrDefault(i => i.Title == nameTb.Text) != service)
+                    List<Service> services2 = services;
+                    //MessageBox.Show(services2.Count.ToString());
+                    services2.Remove(service);
+                    //MessageBox.Show(services2.Count.ToString());
+                    //services2.Where(i=>i.Title != service.Title);
+                    //MessageBox.Show(services2.Count.ToString());
+                    if (services2.Where(i => i.Title == nameTb.Text).Count() != 0)
+                    {
                         MessageBox.Show("Услуга с таким названием уже существует", "Ошибка названия", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                     else
                     {
                         if (int.Parse(durationTb.Text) <= 0 || int.Parse(durationTb.Text) > 240)
