@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,13 +25,14 @@ namespace LearnSchool.Pages
         public static List<Service> services {  get; set; }
         public static List<Client> clients {  get; set; }
         private string timeService;
+        private static Service service1;
         public AddSchedulePage(Service service)
         {
             InitializeComponent();
 
             services = new List<Service>(DBConnection.learnSchool.Service);
             clients = new List<Client>(DBConnection.learnSchool.Client);
-
+            service1 = service;
             titleTb.Text = service.Title;
             durationTb.Text = service.Duration.ToString();
 
@@ -122,7 +124,25 @@ namespace LearnSchool.Pages
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            var client = clientsCb.SelectedItem as Client;
+            ClientService clientService = new ClientService();
+            if (timeTb.Text == "" || dateDp.SelectedDate == null || client == null)
+            {
+                MessageBox.Show("Вы заполнили не все данные!", "Ошибка заполнения данных", MessageBoxButton.OK, MessageBoxImage.Error); ;
+            }  
+            else
+            {
+                clientService.ServiceID = service1.ID;
+                clientService.ClientID = client.ID;
+                TimeSpan time = DateTime.Parse(timeService).TimeOfDay;
+
+                var startTimeString = dateDp.SelectedDate.ToString().Substring(0, 11) + time.ToString();
+                clientService.StartTime = DateTime.Parse(startTimeString.Trim());
+
+                DBConnection.learnSchool.ClientService.Add(clientService);
+                DBConnection.learnSchool.SaveChanges();
+                NavigationService.Navigate(new ServicesPage());
+            }
         }
 
     }

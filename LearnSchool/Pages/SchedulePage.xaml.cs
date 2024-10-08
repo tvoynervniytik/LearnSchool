@@ -82,7 +82,7 @@ namespace LearnSchool.Pages
         private void Timer_Tick_S(object sender, EventArgs e)
         {
             seconds -= 1;
-            if (seconds < 9)
+            if (seconds < 10)
             secTb.Text = "0" + seconds.ToString();
             else
                 secTb.Text = seconds.ToString();
