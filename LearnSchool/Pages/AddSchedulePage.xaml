@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1450"
       Title="AddSchedulePage">
-
     <Grid>
         <!--
     Разметка страницы
@@ -74,10 +73,81 @@
         <!--
     Основная часть
     -->
+        
+        <StackPanel Grid.Row="2" Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        
+                    Background="#A3DCFF">
+            <!--Услуга-->
+            <StackPanel Width="460" Background="AliceBlue"
+                        Margin="10 0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Услуга" 
+                           Style="{StaticResource default}"
+                           TextAlignment="Center"
+                           FontWeight="DemiBold"/>
+                <StackPanel Orientation="Horizontal" Margin="0 20">
+                    <TextBlock Text=" Наименование: " 
+                               Style="{StaticResource default}"/>
+                    <TextBox Background="AliceBlue" 
+                             Width="220"
+                             x:Name="titleTb"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 20">
+                    <TextBlock Text=" Длительность: " 
+                               Style="{StaticResource default}"/>
+                    <TextBox Background="AliceBlue" 
+                             Width="150"
+                             TextWrapping="Wrap"
+                             x:Name="durationTb"/>
+                    <TextBlock Text=" мин" 
+                               Style="{StaticResource default}"/>
+                </StackPanel>
+            </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="2">
-
-            
+            <!--Правая колонка-->
+            <StackPanel>
+                <!--Клиент-->
+                <StackPanel Width="460" Background="AliceBlue"
+                        Margin="10 10">
+                    <TextBlock Text="Клиент" 
+                           Style="{StaticResource default}"
+                           TextAlignment="Center"
+                           FontWeight="DemiBold"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20">
+                        <ComboBox Background="AliceBlue" 
+                             Width="300"
+                             x:Name="tleTb"/>
+                    </StackPanel>
+                </StackPanel>
+                <!--Дата-->
+                    <StackPanel Width="460" Background="AliceBlue"
+                        Margin="10 10">
+                        <TextBlock Text="Данные о записи" 
+                           Style="{StaticResource default}"
+                           TextAlignment="Center"
+                           FontWeight="DemiBold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 20">
+                            <TextBlock Text=" Дата: " 
+                               Style="{StaticResource default}"/>
+                            <DatePicker Height="50"
+                                    Name="DateDp"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 20">
+                            <TextBlock Text=" Время: " 
+                                   Style="{StaticResource default}"/>
+                            <TextBox Background="AliceBlue" 
+                                Width="250"
+                                TextWrapping="Wrap"
+                                x:Name="timeTb" TextChanged="timeTb_TextChanged" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Button Margin="10" Content="add"
+                    x:Name="addBtn" Click="addBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>
