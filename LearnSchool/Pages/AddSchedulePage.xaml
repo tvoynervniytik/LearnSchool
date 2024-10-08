@@ -78,28 +78,33 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal"
-                        
+                        Height="500"
                     Background="#A3DCFF">
+            <!--Левая колонка-->
             <!--Услуга-->
-            <StackPanel Width="460" Background="AliceBlue"
+            <StackPanel Width="600" Background="AliceBlue"
                         Margin="10 0"
+                        Height="390"
                         VerticalAlignment="Center">
                 <TextBlock Text="Услуга" 
                            Style="{StaticResource default}"
                            TextAlignment="Center"
                            FontWeight="DemiBold"/>
-                <StackPanel Orientation="Horizontal" Margin="0 20">
+                <StackPanel Orientation="Horizontal" Height="200" Margin="0 20">
                     <TextBlock Text=" Наименование: " 
                                Style="{StaticResource default}"/>
                     <TextBox Background="AliceBlue" 
-                             Width="220"
+                             Width="350"
+                             TextWrapping="Wrap"
+                             IsEnabled="False"
                              x:Name="titleTb"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 20">
                     <TextBlock Text=" Длительность: " 
                                Style="{StaticResource default}"/>
                     <TextBox Background="AliceBlue" 
-                             Width="150"
+                             Width="100"
+                             IsEnabled="False"
                              TextWrapping="Wrap"
                              x:Name="durationTb"/>
                     <TextBlock Text=" мин" 
@@ -108,7 +113,7 @@
             </StackPanel>
 
             <!--Правая колонка-->
-            <StackPanel>
+            <StackPanel VerticalAlignment="Center">
                 <!--Клиент-->
                 <StackPanel Width="460" Background="AliceBlue"
                         Margin="10 10">
@@ -117,10 +122,22 @@
                            TextAlignment="Center"
                            FontWeight="DemiBold"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20">
-                        <ComboBox Background="AliceBlue" 
-                             Width="300"
-                             x:Name="tleTb"/>
-                    </StackPanel>
+                            <ComboBox Background="AliceBlue" 
+                                      Width="300"
+                                      Height="90"
+                                      ItemsSource="{Binding clients}"
+                                      x:Name="clientsCb">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding FirstName}"/>
+                                            <TextBlock Text="{Binding LastName}"/>
+                                            <TextBlock Text="{Binding Patronymic}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
                 </StackPanel>
                 <!--Дата-->
                     <StackPanel Width="460" Background="AliceBlue"
@@ -133,7 +150,7 @@
                             <TextBlock Text=" Дата: " 
                                Style="{StaticResource default}"/>
                             <DatePicker Height="50"
-                                    Name="DateDp"/>
+                                    Name="dateDp"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0 20">
                             <TextBlock Text=" Время: " 

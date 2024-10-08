@@ -22,10 +22,19 @@ namespace LearnSchool.Pages
     public partial class AddSchedulePage : Page
     {
         public static List<Service> services {  get; set; }
-        public static List<Client> clients {  get; set; } 
+        public static List<Client> clients {  get; set; }
+        private string timeService;
         public AddSchedulePage(Service service)
         {
             InitializeComponent();
+
+            services = new List<Service>(DBConnection.learnSchool.Service);
+            clients = new List<Client>(DBConnection.learnSchool.Client);
+
+            titleTb.Text = service.Title;
+            durationTb.Text = service.Duration.ToString();
+
+            this.DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -108,11 +117,13 @@ namespace LearnSchool.Pages
                 }
             }
             timeTb.Text = filteredText;
+            timeService = filteredText;
         }
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
+
     }
 }
