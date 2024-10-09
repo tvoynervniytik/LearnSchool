@@ -141,7 +141,7 @@ namespace LearnSchool.Pages
 
                 DBConnection.learnSchool.ClientService.Add(clientService);
                 DBConnection.learnSchool.SaveChanges();
-                MessageBox.Show($"Добавлена запись на услугу \"{service1.Title}\" клиента {client.FirstName} {client.LastName[0]}.{client.Patronymic[0]}. на {startTime}");
+                MessageBox.Show($"Добавлена запись на услугу \"{service1.Title.Trim()}\" клиента {client.FirstName.Trim()} {client.LastName.Trim()[0]}.{client.Patronymic.Trim()[0]}. на {startTime}");
                 NavigationService.Navigate(new ServicesPage());
             }
         }

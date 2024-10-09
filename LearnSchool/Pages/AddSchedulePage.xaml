@@ -163,7 +163,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Button Margin="10" Content="add"
+            <Button Margin="10" Content="добавить"
                     x:Name="addBtn" Click="addBtn_Click"/>
         </StackPanel>
     </Grid>
